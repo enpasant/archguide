@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+  <meta http-equiv="CONTENT-TYPE" content="text/html; charset=UTF-8">
+  <link rel="stylesheet" href="../styles/style.css"/>
+  <title>ArchGuide - instalar o Arch</title>
+</head>
+<body>
+      <!-- Barra lateral -->
+    <div class="sidebar" id="sidebar">
+        <h2>Arch Guide</h2>
+        <ul>
+            <li><a href="installguide.html">1 - Como Instalar</a></li>
+          <li><a href="archinstguide.html">1.1 - Instalando via ArchInstall</a></li>
+             <li><a href="cmdguide.html">2 - Como Usar o Terminal</a></li>
+          <li><a href="../index.html">Inicio</a></li>
+        </ul>
+    </div>
+  
+
+    <!-- Botão para abrir/fechar a barra lateral -->
+    <button class="open-btn" id="openBtn">☰</button>
+
+
+  <footer>
+  
+  </footer>
+ 
+    <header>
+        <h1>Instalação do Arch Linux - Passo a Passo</h1>
+        <p>Este tutorial descreve os passos necessários para instalar o Arch Linux em seu computador.</p>
+    </header>
+
+    <section>
+        <h2>Pré-Requisitos</h2>
+        <ul>
+            <li>Um computador com capacidade de inicializar a partir de um pendrive ou mídia de instalação.</li>
+            <li>Acesso à internet (preferencialmente via cabo ou rede com fio).</li>
+            <li>Uma mídia de instalação do Arch Linux (usaremos o pendrive com a ISO oficial).</li>
+        </ul>
+    </section>
+
+    <section>
+        <h2>Passo 1: Baixar a ISO do Arch Linux</h2>
+        <ol>
+            <li>Vá até o site oficial do Arch Linux: <a href="https://www.archlinux.org/download/" target="_blank">https://www.archlinux.org/download/</a></li>
+            <li>Baixe a ISO mais recente. O arquivo terá uma extensão <code>.iso</code>.</li>
+            <li>Crie um pendrive inicializável com a ISO usando ferramentas como o <strong>Rufus</strong> (Windows) ou <strong>dd</strong> (Linux/Mac).</li>
+        </ol>
+    </section>
+
+    <section>
+        <h2>Passo 2: Inicializar a partir do Pendrive</h2>
+        <ol>
+            <li>Conecte o pendrive ao computador e reinicie o sistema.</li>
+            <li>Entre na BIOS ou UEFI do seu computador (geralmente pressionando uma tecla como F2, F12, DEL ou ESC logo após ligar o PC).</li>
+            <li>Altere a ordem de inicialização para que o sistema inicialize primeiro a partir do pendrive.</li>
+            <li>Salve as configurações e saia da BIOS/UEFI. O Arch Linux será carregado a partir do pendrive.</li>
+        </ol>
+    </section>
+
+    <section>
+        <h2>Passo 3: Configurar o Teclado (se necessário)</h2>
+        <p>O Arch Linux usa o layout de teclado <strong>QWERTY</strong> por padrão, mas se você precisar de um layout diferente, pode configurá-lo com o comando <code>loadkeys</code>.</p>
+        <pre><code>loadkeys br-abnt2</code></pre>
+    </section>
+
+    <section>
+        <h2>Passo 4: Conectar-se à Internet</h2>
+        <h3>Conexão com fio (Ethernet)</h3>
+        <p>Se você estiver usando uma conexão com fio, o Arch geralmente irá configurar automaticamente a rede. Verifique com o comando:</p>
+        <pre><code>ip a</code></pre>
+        <p>Se você ver uma interface de rede ativa (geralmente chamada <code>enp0s3</code> ou <code>eth0</code>), então a rede está conectada.</p>
+
+        <h3>Conexão sem fio (Wi-Fi)</h3>
+        <p>Para conectar-se a uma rede sem fio, use o <strong>iwctl</strong>:</p>
+        <ol>
+            <li>Inicie o iwctl:</li>
+            <pre><code>iwctl</code></pre>
+            <li>Liste as interfaces disponíveis:</li>
+            <pre><code>device list</code></pre>
+            <li>Escaneie as redes Wi-Fi:</li>
+            <pre><code>station &lt;nome_da_interface&gt; scan</code></pre>
+            <li>Conecte-se à rede Wi-Fi:</li>
+            <pre><code>station &lt;nome_da_interface&gt; connect &lt;nome_da_rede&gt;</code></pre>
+            <li>Verifique a conexão com:</li>
+            <pre><code>ping -c 3 archlinux.org</code></pre>
+        </ol>
+    </section>
+
+    <section>
+        <h2>Passo 5: Preparar o Disco</h2>
+        <p>1. Liste os discos disponíveis:</p>
+        <pre><code>lsblk</code></pre>
+        <p>2. Use o <code>fdisk</code> ou <code>parted</code> para particionar o disco. Exemplo usando <code>fdisk</code>:</p>
+        <pre><code>fdisk /dev/sda</code></pre>
+        <p>3. Crie a partição raiz <code>/</code>, e (opcionalmente) uma partição para swap e uma para o <code>/home</code>.</p>
+        <p>4. Para criar as partições:</p>
+        <ul>
+            <li>Digite <code>n</code> para criar uma nova partição.</li>
+            <li>Escolha o tipo de partição (geralmente <code>Linux</code> ou <code>Linux filesystem</code>).</li>
+        </ul>
+        <p>5. Após criar as partições, aplique as alterações com <code>w</code>.</p>
+        <p>6. Formate as partições com <code>mkfs</code>:</p>
+        <pre><code>mkfs.ext4 /dev/sda1</code></pre>
+        <p>7. Para a partição swap (se tiver):</p>
+        <pre><code>mkswap /dev/sda2</code></pre>
+        <pre><code>swapon /dev/sda2</code></pre>
+    </section>
+
+    <section>
+        <h2>Passo 6: Montar as Partições</h2>
+        <p>1. Monte a partição raiz:</p>
+        <pre><code>mount /dev/sda1 /mnt</code></pre>
+        <p>2. Se tiver uma partição <code>/home</code>, monte-a:</p>
+        <pre><code>mount /dev/sda3 /mnt/home</code></pre>
+        <p>3. Caso tenha configurado swap, não há necessidade de montar manualmente, pois foi ativado com <code>swapon</code>.</p>
+    </section>
+
+    <section>
+        <h2>Passo 7: Instalar o Sistema Base</h2>
+        <p>1. Use o comando <code>pacstrap</code> para instalar o sistema base:</p>
+        <pre><code>pacstrap /mnt base linux linux-firmware</code></pre>
+        <p>2. Aguarde a instalação completar. Esse processo pode levar algum tempo dependendo da sua conexão à internet e desempenho do sistema.</p>
+    </section>
+
+    <section>
+        <h2>Passo 8: Configurar o Sistema</h2>
+        <p>1. Gere o <code>fstab</code> (para montar as partições automaticamente):</p>
+        <pre><code>genfstab -U /mnt >> /mnt/etc/fstab</code></pre>
+        <p>2. Verifique se o <code>fstab</code> foi criado corretamente:</p>
+        <pre><code>cat /mnt/etc/fstab</code></pre>
+        <p>3. Faça um <code>chroot</code> no novo sistema instalado:</p>
+        <pre><code>arch-chroot /mnt</code></pre>
+    </section>
+
+    <section>
+        <h2>Passo 9: Configurar o Relógio</h2>
+        <p>1. Sincronize o relógio do sistema:</p>
+        <pre><code>timedatectl set-ntp true</code></pre>
+        <p>2. Verifique o status do relógio:</p>
+        <pre><code>timedatectl status</code></pre>
+    </section>
+
+    <section>
+        <h2>Passo 10: Configurar a Localização</h2>
+        <p>1. Defina a localidade. Edite o arquivo <code>/etc/locale.gen</code> e descomente o idioma desejado (exemplo: português brasileiro):</p>
+        <pre><code>nano /etc/locale.gen</code></pre>
+        <p>Descomente a linha:</p>
+        <pre><code>pt_BR.UTF-8 UTF-8</code></pre>
+        <p>2. Gere os locais:</p>
+        <pre><code>locale-gen</code></pre>
+        <p>3. Configure o idioma padrão:</p>
+        <pre><code>echo "LANG=pt_BR.UTF-8" > /etc/locale.conf</code></pre>
+    </section>
+
+    <section>
+        <h2>Passo 11: Configurar o Nome do Host</h2>
+        <p>1. Defina o nome do host:</p>
+        <pre><code>echo "meu-computador" > /etc/hostname</code></pre>
+        <p>2. Edite o arquivo <code>/etc/hosts</code> para adicionar o nome do host:</p>
+        <pre><code>nano /etc/hosts</code></pre>
+        <p>Adicione as seguintes linhas:</p>
+        <pre><code>127.0.0.1   localhost
+::1         localhost
+127.0.1.1   meu-computador.localdomain   meu-computador</code></pre>
+    </section>
+
+    <section>
+        <h2>Passo 12: Configurar o Bootloader</h2>
+        <p>1. Instale o <strong>GRUB</strong>:</p>
+        <pre><code>pacman -S grub</code></pre>
+        <p>2. Instale o GRUB no disco (assumindo que o disco é <code>/dev/sda</code>):</p>
+        <pre><code>grub-install --target=i386-pc /dev/sda</code></pre>
+        <p>3. Gere o arquivo de configuração do GRUB:</p>
+        <pre><code>grub-mkconfig -o /boot/grub/grub.cfg</code></pre>
+    </section>
+
+    <section>
+        <h2>Passo 13: Finalizar a Instalação</h2>
+        <p>1. Defina a senha de root:</p>
+        <pre><code>passwd</code></pre>
+        <p>2. Instale um pacote de rede básico (se necessário, como o <code>networkmanager</code>):</p>
+        <pre><code>pacman -S networkmanager</code></pre>
+        <p>3. Ative o NetworkManager:</p>
+        <pre><code>systemctl enable NetworkManager</code></pre>
+        <p>4. Saia do <code>chroot</code>:</p>
+        <pre><code>exit</code></pre>
+        <p>5. Desmonte as partições:</p>
+        <pre><code>umount -R /mnt</code></pre>
+        <p>6. Reinicie o sistema:</p>
+        <pre><code>reboot</code></pre>
+    </section>
+
+    <section>
+        <h2>Passo 14: Pós-Instalação</h2>
+        <p>Agora, você tem uma instalação básica do Arch Linux. Algumas tarefas pós-instalação incluem:</p>
+        <ul>
+            <li>Instalar um ambiente gráfico (Xorg, Wayland, etc.).</li>
+            <li>Instalar um gerenciador de pacotes adicional, como o <strong>pacaur</strong> ou <strong>yay</strong>.</li>
+            <li>Configurar o usuário normal.</li>
+            <li>Instalar drivers gráficos, de áudio e outros pacotes adicionais.</li>
+        </ul>
+        <p>Este tutorial cobre a instalação mínima do Arch. A partir daqui, você pode personalizar seu sistema de acordo com suas necessidades!</p>
+    </section>
+  
+    <header>
+        <h1>Passo 15: Instalar um Desktop Environment (DE) e um Display Manager (DM)</h1>
+        <p>Após instalar o sistema base do Arch Linux, o próximo passo é configurar um ambiente gráfico (DE - Desktop Environment) e um gerenciador de exibição (DM - Display Manager) para fornecer uma interface gráfica para o usuário. Neste passo, vamos mostrar como instalar um DE e um DM populares, como o <strong>GNOME</strong> e o <strong>LightDM</strong>, mas você pode optar por outros DEs ou DMs de sua preferência.</p>
+    </header>
+
+    <section>
+        <h2>15.1: Instalar o Desktop Environment (DE)</h2>
+        <p>O Arch Linux oferece uma grande variedade de ambientes gráficos. Aqui vamos mostrar como instalar o <strong>GNOME</strong>, mas você pode optar por outros, como <strong>KDE Plasma</strong>, <strong>XFCE</strong>, <strong>LXQt</strong>, entre outros.</p>
+
+        <h3>Instalar o GNOME</h3>
+        <ol>
+            <li>Execute o comando abaixo para instalar o GNOME junto com alguns pacotes extras recomendados:</li>
+        </ol>
+        <pre><code>pacman -S gnome gnome-extra</code></pre>
+        <p>O pacote <code>gnome-extra</code> inclui aplicativos adicionais úteis para o GNOME, como o GIMP, o Evolution, entre outros.</p>
+
+        <h3>Ativar o GNOME</h3>
+        <p>Após a instalação, ative o serviço do GNOME para garantir que o ambiente gráfico seja iniciado corretamente:</p>
+        <pre><code>systemctl enable gdm</code></pre>
+        <p>O <code>gdm</code> é o gerenciador de exibição do GNOME, que será configurado logo em seguida.</p>
+
+        <h3>Alternativas de Desktop Environments:</h3>
+        <p>Se preferir outro DE, você pode instalar pacotes correspondentes. Aqui estão alguns exemplos:</p>
+        <ul>
+            <li><strong>KDE Plasma</strong>:</li>
+        </ul>
+        <pre><code>pacman -S plasma kde-applications</code></pre>
+        <p>Ative o gerenciador de exibição <strong>SDDM</strong> (usado pelo KDE):</p>
+        <pre><code>systemctl enable sddm</code></pre>
+        <ul>
+            <li><strong>XFCE</strong>:</li>
+        </ul>
+        <pre><code>pacman -S xfce4 xfce4-goodies</code></pre>
+        <p>Ative o <strong>LightDM</strong>:</p>
+        <pre><code>systemctl enable lightdm</code></pre>
+        <ul>
+            <li><strong>LXQt</strong>:</li>
+        </ul>
+        <pre><code>pacman -S lxqt</code></pre>
+        <p>Ative o <strong>LightDM</strong>:</p>
+        <pre><code>systemctl enable lightdm</code></pre>
+    </section>
+
+    <section>
+        <h2>15.2: Instalar o Display Manager (DM)</h2>
+        <p>O <strong>Display Manager (DM)</strong> é o programa que gerencia o login gráfico e inicializa a sessão gráfica do sistema. Existem várias opções de DM, e a escolha depende do DE ou preferências pessoais. Vamos configurar o <strong>GDM</strong> (para GNOME), mas você pode usar outros como <strong>LightDM</strong> ou <strong>SDDM</strong>, dependendo do seu DE.</p>
+
+        <h3>Instalar o GDM (para GNOME)</h3>
+        <ol>
+            <li>Se você escolheu o GNOME como seu DE, o <strong>GDM</strong> (GNOME Display Manager) já foi instalado junto com o GNOME. Caso contrário, você pode instalá-lo manualmente com o seguinte comando:</li>
+        </ol>
+        <pre><code>pacman -S gdm</code></pre>
+
+        <h3>Ativar o GDM</h3>
+        <p>Para que o GDM inicie automaticamente ao ligar o sistema, habilite o serviço:</p>
+        <pre><code>systemctl enable gdm</code></pre>
+
+        <h3>Alternativas de Display Managers:</h3>
+        <h4>LightDM (recomendado para XFCE, LXQt, ou outros DEs mais leves):</h4>
+        <ol>
+            <li>Instale o LightDM:</li>
+        </ol>
+        <pre><code>pacman -S lightdm lightdm-gtk-greeter</code></pre>
+        <ol>
+            <li>Ative o LightDM:</li>
+        </ol>
+        <pre><code>systemctl enable lightdm</code></pre>
+
+        <h4>SDDM (para KDE Plasma):</h4>
+        <ol>
+            <li>Instale o SDDM:</li>
+        </ol>
+        <pre><code>pacman -S sddm</code></pre>
+        <ol>
+            <li>Ative o SDDM:</li>
+        </ol>
+        <pre><code>systemctl enable sddm</code></pre>
+    </section>
+
+    <section>
+        <h2>15.3: Reiniciar o Sistema</h2>
+        <p>Após a instalação do Desktop Environment (DE) e Display Manager (DM), reinicie o sistema para que as alterações entrem em vigor. Quando o sistema reiniciar, o DM será iniciado e você verá a tela de login.</p>
+        <pre><code>reboot</code></pre>
+        <p>Na tela de login, entre com o seu nome de usuário e senha e o sistema irá iniciar o ambiente gráfico escolhido.</p>
+    </section>
+
+    <footer>
+        <h2>Passo 15 Concluído!</h2>
+        <p>Agora, você tem um ambiente gráfico completamente funcional no Arch Linux. A partir daqui, você pode instalar mais aplicativos gráficos, personalizar o ambiente de acordo com suas preferências, e continuar configurando o seu sistema conforme necessário.</p>
+
+        <h3>Conclusão</h3>
+        <ul>
+            <li><strong>DE (Desktop Environment)</strong>: Oferece uma interface gráfica completa com ferramentas e aplicativos para facilitar a interação com o sistema.</li>
+            <li><strong>DM (Display Manager)</strong>: Gerencia a tela de login gráfica e o gerenciamento de sessões.</li>
+        </ul>
+        <p>Com isso, você agora pode usar o Arch Linux com uma interface gráfica personalizada, seja o GNOME, KDE, XFCE ou outro DE de sua preferência!</p>
+    </footer>
+ <script src="../scripts/script.js"></script>
+<footer>
+        <p>&copy; 2024 Arch Guide | Criado para entusiastas do Arch Linux.</p>
+    </footer>
+</body>
+</html>
+
+</body>
+</html>
+

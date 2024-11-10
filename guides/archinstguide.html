@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ArchGuide - archinstall</title>
+    <link rel="stylesheet" href="../styles/style.css">
+</head>
+<body>
+      <!-- Barra lateral -->
+    <div class="sidebar" id="sidebar">
+        <h2>Arch Guide</h2>
+        <ul>
+            <li><a href="installguide.html">1 - Como Instalar</a></li>
+            <li><a href="archinstguide.html">1.1 - Instalando via ArchInstall</a></li>
+             <li><a href="cmdguide.html">2 - Como Usar o Terminal</a></li>
+          <li><a href="../index.html">Inicio</a></li>
+        </ul>
+    </div>
+  
+
+    <!-- Botão para abrir/fechar a barra lateral -->
+    <button class="open-btn" id="openBtn">☰</button>
+
+    <header>
+        <h1>Guia de Instalação do Arch Linux com <code>archinstall</code></h1>
+    </header>
+
+    <section>
+        <h2>1. Preparação Inicial</h2>
+        <p>Certifique-se de que você possui:</p>
+        <ul>
+            <li>Uma mídia inicializável do Arch Linux (pen drive ou CD).</li>
+            <li>Conexão à internet.</li>
+        </ul>
+        <pre><code>Boot pelo pendrive e selecione a opção de inicialização padrão.</code></pre>
+    </section>
+
+    <section>
+        <h2>2. Verificar Conexão com a Internet</h2>
+        <p>Teste a conexão utilizando:</p>
+        <pre><code>ping archlinux.org</code></pre>
+        <p>Se não houver conexão, configure-a com <code>iwctl</code> para redes Wi-Fi ou verifique o cabo Ethernet.</p>
+    </section>
+
+    <section>
+        <h2>3. Iniciar o <code>archinstall</code></h2>
+        <p>O Arch Linux oferece um instalador automatizado. Para iniciá-lo, basta digitar:</p>
+        <pre><code>archinstall</code></pre>
+
+        <p>Siga as etapas do assistente:</p>
+        <ul>
+            <li>Selecione o idioma e o layout do teclado.</li>
+            <li>Escolha o disco para instalação.</li>
+            <li>Configure a partição (o particionamento automático é recomendado para iniciantes).</li>
+            <li>Selecione o sistema de arquivos desejado (como ext4).</li>
+            <li>Defina o mirror para o repositório (opção automática é recomendada).</li>
+            <li>Configure o nome do usuário, senha e senha de root.</li>
+            <li>Escolha um ambiente gráfico, se necessário (GNOME, KDE, etc.).</li>
+        </ul>
+    </section>
+
+    <section>
+        <h2>4. Instalação e Configuração Final</h2>
+        <p>Após concluir o assistente, o sistema será instalado. Aguarde até que o processo termine.</p>
+        <pre><code>Reinicie o sistema utilizando o comando:</code></pre>
+        <pre><code>reboot</code></pre>
+        <p>Remova a mídia de instalação para evitar que o sistema inicialize pelo pendrive novamente.</p>
+    </section>
+
+    <section class="aviso">
+        <h2>Aviso Importante</h2>
+        <p>O Arch Linux é um sistema voltado para usuários avançados. Certifique-se de compreender cada etapa antes de continuar.</p>
+    </section>
+
+    <footer>
+        <p>&copy; 2024 - Guia de Instalação do Arch Linux</p>
+    </footer>
+  <script src="../scripts/script.js"></script>
+</body>
+</html>
