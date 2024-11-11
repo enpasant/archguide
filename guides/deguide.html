@@ -7,21 +7,29 @@
     <link rel="stylesheet" href="../styles/style.css">
 </head>
 <body>
-    
-    <!-- Barra lateral -->
+           <!-- Barra lateral -->
     <div class="sidebar" id="sidebar">
         <h2>Arch Guide</h2>
         <ul>
-            <li><h2>Seção 1 - Básicos</h2></li>
+          
+          <li><h2>Seção 1 - Basicos</h2></li>
             <li><a href="installguide.html">1 - Como Instalar</a></li>
             <li><a href="archinstguide.html">1.1 - Instalando via ArchInstall</a></li>
-            <li><a href="cmdguide.html">2 - Como Usar o Terminal</a></li>
-            <li><h2>Seção 2 - Customização</h2></li>
-            <li><a href="deguide.html">1 - Melhores DE's</a></li>
-            <li><a href="../index.html">Início</a></li>
+             <li><a href="cmdguide.html">2 - Como Usar o Terminal</a></li>
+          <li><h2>Seção 2 - Customização</h2></li>
+          <li><a href="deguide.html">1 - Melhores DE's</a></li>
+          <li><a href="driverguide.html">2 - Drivers</a></li>
+          <li><p>Configurações:</p></li>
+          <li><!-- Slider para alternar -->
+    <div class="toggle-container">
+        <input type="checkbox" id="mode-toggle" class="toggle-checkbox">
+        <label for="mode-toggle" class="toggle-label"></label>
+      <script src="../scripts/dlmode.js"></script>
+    </div></li>
         </ul>
     </div>
   
+
     <!-- Botão para abrir/fechar a barra lateral -->
     <button class="open-btn" id="openBtn">☰</button>
 

@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ArchGuide - Drivers</title>
+    <link rel="stylesheet" href="../styles/style.css">
+</head>
+<body>
+         <!-- Barra lateral -->
+    <div class="sidebar" id="sidebar">
+        <h2>Arch Guide</h2>
+        <ul>
+          
+          <li><h2>Seção 1 - Basicos</h2></li>
+            <li><a href="installguide.html">1 - Como Instalar</a></li>
+            <li><a href="archinstguide.html">1.1 - Instalando via ArchInstall</a></li>
+             <li><a href="cmdguide.html">2 - Como Usar o Terminal</a></li>
+          <li><h2>Seção 2 - Customização</h2></li>
+          <li><a href="deguide.html">1 - Melhores DE's</a></li>
+          <li><a href="driverguide.html">2 - Drivers</a></li>
+          <li><p>Configurações:</p></li>
+          <li><!-- Slider para alternar -->
+    <div class="toggle-container">
+        <input type="checkbox" id="mode-toggle" class="toggle-checkbox">
+        <label for="mode-toggle" class="toggle-label"></label>
+      <script src="../scripts/dlmode.js"></script>
+    </div></li>
+        </ul>
+    </div>
+  
+
+    <!-- Botão para abrir/fechar a barra lateral -->
+    <button class="open-btn" id="openBtn">☰</button>
+
+    <header>
+        <h1>Guia de Instalação de Drivers no Arch Linux</h1>
+    </header>
+    <main>
+        <h2>Introdução</h2>
+        <p>Este guia explica como instalar drivers essenciais no Arch Linux, incluindo drivers de vídeo, Wi-Fi e áudio. As instruções abaixo incluem links para os sites oficiais e recursos úteis.</p>
+
+        <h2>1. Atualizar o Sistema</h2>
+        <p>Antes de instalar qualquer driver, atualize seu sistema para garantir que você tenha os pacotes mais recentes:</p>
+        <pre><code>sudo pacman -Syu</code></pre>
+        <p>Para mais informações sobre o gerenciamento de pacotes no Arch Linux, visite a <a href="https://wiki.archlinux.org/title/Pacman_(Português)" target="_blank">documentação oficial do Pacman</a>.</p>
+
+        <h2>2. Drivers de Vídeo</h2>
+        <p>Identifique sua GPU usando o seguinte comando no terminal:</p>
+        <pre><code>lspci | grep -e VGA</code></pre>
+        <p>Com base no resultado, instale o driver apropriado:</p>
+        <ul>
+            <li>
+                <strong>NVIDIA:</strong><br>
+                Para GPUs NVIDIA modernas, instale o driver oficial:
+                <pre><code>sudo pacman -S nvidia nvidia-utils</code></pre>
+                Para versões mais antigas, use o driver <code>nvidia-390xx</code>. Mais informações podem ser encontradas no site oficial da NVIDIA: 
+                <a href="https://www.nvidia.com/Download/index.aspx" target="_blank">www.nvidia.com</a>.
+            </li>
+            <li>
+                <strong>AMD:</strong><br>
+                A maioria das GPUs AMD funciona com o driver <code>mesa</code>, que geralmente está incluído na instalação padrão:
+                <pre><code>sudo pacman -S mesa</code></pre>
+                Para GPUs mais novas, você também pode precisar do pacote <code>vulkan-radeon</code>. Saiba mais no site oficial da AMD: 
+                <a href="https://www.amd.com/en/support" target="_blank">www.amd.com</a>.
+            </li>
+            <li>
+                <strong>Intel:</strong><br>
+                Para GPUs integradas Intel, instale o driver <code>mesa</code>:
+                <pre><code>sudo pacman -S mesa</code></pre>
+                Informações adicionais estão disponíveis no site da Intel: 
+                <a href="https://www.intel.com/content/www/us/en/download-center/home.html" target="_blank">www.intel.com</a>.
+            </li>
+        </ul>
+
+        <h2>3. Drivers de Wi-Fi</h2>
+        <p>Identifique seu adaptador Wi-Fi usando o comando:</p>
+        <pre><code>lspci | grep -i wireless</code></pre>
+        <p>Baseado no fabricante, siga as instruções abaixo:</p>
+        <ul>
+            <li>
+                <strong>Broadcom:</strong><br>
+                Instale o driver <code>broadcom-wl</code>:
+                <pre><code>sudo pacman -S broadcom-wl</code></pre>
+                Consulte o site oficial da Broadcom: 
+                <a href="https://www.broadcom.com/" target="_blank">www.broadcom.com</a>.
+            </li>
+            <li>
+                <strong>Intel:</strong><br>
+                A maioria dos adaptadores Intel usa o pacote <code>linux-firmware</code>:
+                <pre><code>sudo pacman -S linux-firmware</code></pre>
+                Confira mais no site oficial da Intel: 
+                <a href="https://www.intel.com/content/www/us/en/support/articles/000005511/network-and-i-o/wireless.html" target="_blank">Drivers Wireless Intel</a>.
+            </li>
+            <li>
+                <strong>Outros fabricantes:</strong><br>
+                A maioria dos dispositivos é suportada pelo pacote <code>linux-firmware</code>. Consulte a 
+                <a href="https://wiki.archlinux.org/title/Wireless_network_configuration" target="_blank">Wiki do Arch Linux</a> para mais detalhes.
+            </li>
+        </ul>
+
+        <h2>4. Drivers de Áudio</h2>
+        <p>O Arch Linux usa o <code>alsa</code> para gerenciamento de áudio. Certifique-se de instalar os pacotes necessários:</p>
+        <pre><code>sudo pacman -S alsa-utils</code></pre>
+        <p>Se você precisa de suporte a PulseAudio, instale também:</p>
+        <pre><code>sudo pacman -S pulseaudio</code></pre>
+        <p>Para mais informações sobre configuração de áudio, consulte a <a href="https://wiki.archlinux.org/title/Advanced_Linux_Sound_Architecture" target="_blank">Wiki do ALSA</a>.</p>
+
+        <h2>5. Reiniciar o Sistema</h2>
+        <p>Após instalar os drivers, reinicie o sistema para aplicar as mudanças:</p>
+        <pre><code>sudo reboot</code></pre>
+
+        <h2>Conclusão</h2>
+        <p>Seguindo este guia, você configurará os drivers essenciais no Arch Linux. Consulte a <a href="https://wiki.archlinux.org/" target="_blank">Wiki do Arch Linux</a> para mais informações ou suporte adicional.</p>
+    </main>
+     <footer>
+        <p>&copy; 2024 Arch Guide | Criado para entusiastas do Arch Linux.</p>
+    </footer>
+  
+  <script src="../scripts/script.js"></script>
+</body>
+</html>
