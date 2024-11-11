@@ -29,9 +29,7 @@ body{
             color: #e0e0e0; /* Texto mais suave para o terminal */
         }
 
-.p{
-  font-size: 5px;
-}
+
 
 /* Estilos gerais */
 body {
@@ -41,7 +39,7 @@ body {
 }
 
 /* Barra lateral */
-.sidebar {
+.sidebar{
     height: 100%;
     width: 0;
     position: fixed;
@@ -83,18 +81,36 @@ body {
 /* Botão de abrir a barra lateral */
 /* Estilos para o botão */
 .open-btn {
-    font-size: 15px;
     cursor: pointer;
-    position: absolute;
-    top: 1px;
+    position: fixed;
+    top: 20px; /* Um pouco mais de espaçamento do topo */
     left: 20px;
-    background-color: transparent;
-    border: none;
-    color: black;
-    padding: 10px;
+    background-color: #121212; /* Cor verde moderna */
+    border: none; /* Remove a borda */
+    color: white; /* Texto ou ícone em branco */
+    padding: 15px 20px; /* Espaçamento interno para melhorar o design */
     z-index: 2000; /* Garantir que o botão fique acima de outros elementos */
-    transition: background-color 0.3s; /* Suaviza a transição da cor */
+    border-radius: 50px; /* Deixa as bordas arredondadas */
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2); /* Sombra suave */
+    font-size: 32px; /* Tamanho do texto ou ícone */
+    text-align: center;
+    transition: all 0.3s ease; /* Suaviza as transições */
+    height: 64px;
 }
+
+/* Efeito ao passar o mouse */
+.open-btn:hover {
+    background-color: #242424; /* Cor um pouco mais escura para o hover */
+    box-shadow: 0px 6px 8px rgba(0, 0, 0, 0.3); /* Intensifica a sombra */
+    transform: scale(1.05); /* Leve ampliação */
+}
+
+/* Efeito ao clicar */
+.open-btn:active {
+    background-color: #484848; /* Cor mais escura para o clique */
+    transform: scale(0.95); /* Reduz um pouco para simular o clique */
+}
+
 
 /* Cor do botão ao ser clicado */
 .open-btn.clicked {
@@ -152,6 +168,8 @@ header {
     color: #fff;
     padding: 10px 0;
     text-align: center;
+    height: fit-content;
+    width: fit-content;
 }
 
 header nav ul {
@@ -178,13 +196,8 @@ section {
     margin-top: 20px;
 }
 
-h2 {
-    color: #333;
-    margin-bottom: 10px;
-}
 
 .comando {
-    background-color: #fff;
     padding: 15px;
     margin-bottom: 10px;
     border: 1px solid #ddd;
@@ -207,13 +220,87 @@ footer {
     font-size: 0.9em;
 }
 
-header {
-    text-align: center;
-    padding: 20px;
-}
 
 .header-image {
     width: 100%;  /* Ajusta a largura da imagem para a largura total do cabeçalho */
     height: auto; /* Mantém a proporção da imagem */
     margin-bottom: 20px; /* Adiciona um espaço abaixo da imagem */
 }
+
+a{
+    text-decoration: none;
+    font-family: monospace; /* Fonte monoespaçada */
+            background-color: #2e2e2e; /* Fundo escuro, como terminal */
+            color: #00ff00!important; /* Texto verde claro, como terminais antigos */
+            padding: 2px 4px; /* Pequeno espaçamento para o texto */
+            border-radius: 4px; /* Bordas arredondadas para um visual mais agradável */
+            font-size: 1.1em; /* Tamanho de fonte levemente maior */
+            box-shadow: 0 0 5px rgba(0, 255, 0, 0.6); /* Sombramento verde suave */
+            word-wrap: break-word; /* Quebra de linha para código longo */
+            width: fit-content;
+}
+
+/* Estilos gerais */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    transition: background-color 0.5s, color 0.5s;
+}
+
+/* Modo claro */
+body.light-mode {
+    background-color: #ffffff;
+    color: #000000;
+}
+
+/* Modo escuro */
+body.dark-mode {
+    background-color: #121212;
+    color: #ffffff;
+}
+
+/* Estilo do slider */
+.toggle-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+}
+
+.toggle-checkbox {
+    display: none;
+}
+
+.toggle-label {
+    width: 50px;
+    height: 25px;
+    background-color: #ccc;
+    border-radius: 25px;
+    position: relative;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.toggle-label::after {
+    content: "";
+    width: 20px;
+    height: 20px;
+    background-color: #ffffff;
+    border-radius: 50%;
+    position: absolute;
+    top: 2.5px;
+    left: 2.5px;
+    transition: transform 0.3s, background-color 0.3s;
+}
+
+/* Modo ativo (escuro) */
+.toggle-checkbox:checked + .toggle-label {
+    background-color: #4caf50;
+}
+
+.toggle-checkbox:checked + .toggle-label::after {
+    transform: translateX(25px);
+}
+
+
