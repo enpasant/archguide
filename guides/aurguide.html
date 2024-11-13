@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ArchGuide - AUR</title>
+    <link rel="stylesheet" href="../styles/style.css">
+</head>
+<body>
+    <header>
+        <h1>Guia Completo para o AUR (Arch User Repository)</h1>
+    </header>
+    <section>
+        <h2>O que é o AUR?</h2>
+        <p>
+            O AUR (*Arch User Repository*) é um repositório comunitário gerenciado por usuários do Arch Linux. 
+            Ele contém pacotes que não estão disponíveis nos repositórios oficiais, permitindo acesso a softwares adicionais, scripts e ferramentas criados pela comunidade.
+        </p>
+        <p>
+            Apesar de poderoso, é importante lembrar que os pacotes do AUR não são verificados oficialmente, então use-os com cautela.
+        </p>
+
+        <h2>Configurando o AUR</h2>
+        <p>
+            Para acessar e gerenciar pacotes do AUR, você precisará de um ajudante de AUR, como o <code>yay</code> ou o <code>paru</code>. 
+            Esses ajudantes facilitam a instalação, atualização e remoção de pacotes.
+        </p>
+
+        <h3>Instalando o <code>yay</code> (Ajudante do AUR)</h3>
+        <p>
+            Para instalar o <code>yay</code>, siga os passos abaixo:
+        </p>
+        <ol>
+            <li>Certifique-se de ter o <code>git</code> instalado:</li>
+            <pre><code>sudo pacman -S git</code></pre>
+            <li>Clone o repositório do <code>yay</code>:</li>
+            <pre><code>git clone https://aur.archlinux.org/yay.git</code></pre>
+            <li>Entre no diretório do projeto clonado:</li>
+            <pre><code>cd yay</code></pre>
+            <li>Construa e instale o pacote:</li>
+            <pre><code>makepkg -si</code></pre>
+        </ol>
+        <p>Após a instalação, você poderá usar o <code>yay</code> para gerenciar pacotes do AUR.</p>
+
+        <h2>Gerenciando Pacotes do AUR</h2>
+        <h3>Instalar um pacote</h3>
+        <p>Para instalar um pacote do AUR, basta usar:</p>
+        <pre><code>yay -S nome_do_pacote</code></pre>
+        <p>Exemplo: Para instalar o Google Chrome:</p>
+        <pre><code>yay -S google-chrome</code></pre>
+
+        <h3>Atualizar pacotes do AUR</h3>
+        <p>Você pode atualizar todos os pacotes do sistema (incluindo os do AUR) com:</p>
+        <pre><code>yay -Syu</code></pre>
+        <p>Isso é equivalente ao comando <code>sudo pacman -Syu</code>, mas também atualiza pacotes do AUR.</p>
+
+        <h3>Remover pacotes</h3>
+        <p>Para remover um pacote do AUR, utilize:</p>
+        <pre><code>yay -R nome_do_pacote</code></pre>
+        <p>Para remover o pacote e suas dependências não utilizadas:</p>
+        <pre><code>yay -Rns nome_do_pacote</code></pre>
+
+        <h3>Pesquisar pacotes</h3>
+        <p>Você pode procurar por pacotes no AUR com:</p>
+        <pre><code>yay -Ss palavra-chave</code></pre>
+        <p>Exemplo: Para buscar pacotes relacionados ao VLC:</p>
+        <pre><code>yay -Ss vlc</code></pre>
+
+        <h2>Precauções ao Usar o AUR</h2>
+        <p>
+            O AUR é uma ferramenta poderosa, mas requer cuidado. Algumas dicas para garantir a segurança ao usar o AUR:
+        </p>
+        <ul>
+            <li>Leia o código do arquivo <code>PKGBUILD</code> antes de instalar um pacote.</li>
+            <li>Evite instalar pacotes desconhecidos ou de fontes duvidosas.</li>
+            <li>Mantenha seus pacotes atualizados para evitar vulnerabilidades.</li>
+        </ul>
+
+        <h2>Recursos Adicionais</h2>
+        <p>Confira a documentação oficial e recursos úteis:</p>
+        <ul>
+            <li><a href="https://wiki.archlinux.org/title/Arch_User_Repository" target="_blank">Wiki oficial do AUR</a></li>
+            <li><a href="https://aur.archlinux.org/" target="_blank">Página oficial do AUR</a></li>
+        </ul>
+    </section>
+      <footer>
+          <button><a href="../index.html">Retornar</a></button>
+        <p>&copy; 2024 Arch Guide | Criado para entusiastas do Arch Linux.</p>
+    </footer>
+  
+  <script src="../scripts/dlmode.js"></script>
+</body>
+</html>

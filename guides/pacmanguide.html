@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ArchGuide - Gerenciamento de Pacotes</title>
+    <link rel="stylesheet" href="../styles/style.css">
+</head>
+<body>
+    <header>
+        <h1>Gerenciamento de Pacotes com pacman</h1>
+    </header>
+    <section>
+        <p>O <code>pacman</code> é o gerenciador de pacotes oficial do Arch Linux. Ele permite instalar, atualizar, remover e gerenciar pacotes do sistema de maneira eficiente.</p>
+        
+        <h2>Comandos Básicos</h2>
+
+        <h3>1. Instalar Pacotes</h3>
+        <p>Use o seguinte comando para instalar um pacote:</p>
+        <pre><code>sudo pacman -S nome_do_pacote</code></pre>
+        <p>Exemplo:</p>
+        <pre><code>sudo pacman -S vim</code></pre>
+        <p>Isso instalará o editor de texto <code>vim</code>.</p>
+
+        <h3>2. Atualizar Pacotes</h3>
+        <p>Para atualizar todos os pacotes do sistema, incluindo a base do Arch Linux, execute:</p>
+        <pre><code>sudo pacman -Syu</code></pre>
+        <p>Isso garante que o sistema esteja atualizado com os pacotes mais recentes.</p>
+
+        <h3>3. Remover Pacotes</h3>
+        <p>Para remover um pacote instalado:</p>
+        <pre><code>sudo pacman -R nome_do_pacote</code></pre>
+        <p>Para remover o pacote e todas as dependências não utilizadas:</p>
+        <pre><code>sudo pacman -Rns nome_do_pacote</code></pre>
+
+        <h2>Resolvendo Problemas</h2>
+        <p>Se encontrar erros relacionados a dependências quebradas, use:</p>
+        <pre><code>sudo pacman -Syyu</code></pre>
+        <p>Este comando força a sincronização dos repositórios antes de atualizar os pacotes.</p>
+    </section>
+     <footer>
+        <p>&copy; 2024 Arch Guide | Criado para entusiastas do Arch Linux.</p>
+    </footer>
+    <button><a href="../index.html">Retornar</a></button>
+   <script src="../scripts/dlmode.js"></script>
+
+</body>
+</html>

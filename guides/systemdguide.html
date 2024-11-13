@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ArchGuide - Automatização com systemd
+    </title>
+    <link rel="stylesheet" href="../styles/style.css">
+</head>
+<body>
+    <header>
+        <h1>Automatização com systemd</h1>
+    </header>
+    <section>
+        <h2>O que é o systemd?</h2>
+        <p>
+            O <code>systemd</code> é um sistema de inicialização (init system) amplamente usado em distribuições Linux modernas, incluindo o Arch Linux.  
+            Ele gerencia serviços, unidades de sistema e oferece diversas ferramentas para automatizar tarefas e processos.
+        </p>
+
+        <h2>Automatizando Tarefas com systemd</h2>
+        <p>
+            Com o <code>systemd</code>, é possível automatizar a execução de scripts ou comandos em horários específicos, durante o boot ou em eventos do sistema.  
+            Para isso, você usará arquivos de unidades (<code>.service</code> e <code>.timer</code>).
+        </p>
+
+        <h3>Criando um Serviço Básico</h3>
+        <p>
+            Vamos criar um serviço para executar um script automaticamente. Suponha que você tenha um script chamado <code>/usr/local/bin/meu-script.sh</code>.  
+        </p>
+        <ol>
+            <li>Crie o arquivo de unidade:</li>
+            <pre><code>sudo nano /etc/systemd/system/meu-servico.service</code></pre>
+            <li>Adicione o seguinte conteúdo ao arquivo:</li>
+            <pre><code>[Unit]
+Description=Executa meu script personalizado
+After=network.target
+
+[Service]
+ExecStart=/usr/local/bin/meu-script.sh
+Restart=always
+User=root
+
+[Install]
+WantedBy=multi-user.target</code></pre>
+            <li>Salve o arquivo e feche o editor (<code>CTRL+O</code>, <code>CTRL+X</code>).</li>
+        </ol>
+        <h3>Ativando o Serviço</h3>
+        <p>
+            Após criar o arquivo do serviço, ative-o e inicie-o com os seguintes comandos:
+        </p>
+        <pre><code>sudo systemctl enable meu-servico.service</code></pre>
+        <pre><code>sudo systemctl start meu-servico.service</code></pre>
+        <p>Agora, o script será executado automaticamente sempre que o sistema for inicializado.</p>
+
+        <h2>Agendamento com Timers do systemd</h2>
+        <p>
+            O <code>systemd</code> também suporta timers para agendar a execução de serviços em horários específicos.  
+            Vamos criar um timer para executar o mesmo script a cada 10 minutos.
+        </p>
+        <h3>Criando o Timer</h3>
+        <ol>
+            <li>Crie o arquivo do timer:</li>
+            <pre><code>sudo nano /etc/systemd/system/meu-servico.timer</code></pre>
+            <li>Adicione o seguinte conteúdo:</li>
+            <pre><code>[Unit]
+Description=Timer para meu serviço personalizado
+
+[Timer]
+OnBootSec=5min
+OnUnitActiveSec=10min
+
+[Install]
+WantedBy=timers.target</code></pre>
+            <li>Salve e feche o arquivo.</li>
+        </ol>
+        <h3>Ativando o Timer</h3>
+        <p>Para ativar o timer, use os comandos:</p>
+        <pre><code>sudo systemctl enable meu-servico.timer</code></pre>
+        <pre><code>sudo systemctl start meu-servico.timer</code></pre>
+        <p>O serviço agora será executado a cada 10 minutos após o sistema ser iniciado.</p>
+
+        <h2>Monitorando Serviços e Timers</h2>
+        <p>Você pode verificar o status de serviços e timers com os seguintes comandos:</p>
+        <ul>
+            <li>Status do serviço:</li>
+            <pre><code>sudo systemctl status meu-servico.service</code></pre>
+            <li>Status do timer:</li>
+            <pre><code>sudo systemctl status meu-servico.timer</code></pre>
+            <li>Listar timers ativos:</li>
+            <pre><code>systemctl list-timers</code></pre>
+        </ul>
+
+        <h2>Exemplo Prático: Backup Automático</h2>
+        <p>
+            Suponha que você queira fazer backup da pasta <code>/home/usuario/documentos</code> para <code>/backup</code> diariamente.  
+            Crie um script chamado <code>/usr/local/bin/backup.sh</code> com o conteúdo:
+        </p>
+        <pre><code>#!/bin/bash
+rsync -av --delete /home/usuario/documentos /backup</code></pre>
+        <p>
+            Torne o script executável:
+        </p>
+        <pre><code>chmod +x /usr/local/bin/backup.sh</code></pre>
+        <p>
+            Crie um serviço e um timer seguindo os passos acima. No arquivo do timer, use <code>OnCalendar=daily</code> para agendá-lo diariamente.
+        </p>
+
+        <h2>Precauções</h2>
+        <ul>
+            <li>Certifique-se de que os scripts possuem permissões adequadas para evitar erros de execução.</li>
+            <li>Teste seus scripts manualmente antes de configurá-los como serviços.</li>
+            <li>Monitore os logs de serviços com <code>journalctl -u nome-do-servico</code> para identificar possíveis problemas.</li>
+        </ul>
+
+        <h2>Recursos Adicionais</h2>
+        <p>Para mais informações, visite:</p>
+        <ul>
+            <li><a href="https://wiki.archlinux.org/title/Systemd" target="_blank">Wiki do Arch Linux sobre systemd</a></li>
+            <li><a href="https://freedesktop.org/wiki/Software/systemd/" target="_blank">Documentação oficial do systemd</a></li>
+        </ul>
+    </section>
+    <footer>
+        <button><a href="../index.html">Retornar</a></button>
+        <p>&copy; 2024 Arch Guide | Criado para entusiastas do Arch Linux.</p>
+    </footer>
+  
+  <script src="../scripts/dlmode.js"></script>
+</body>
+</html>

@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ArchGuide - PKGBUILD</title>
+    <link rel="stylesheet" href="../styles/style.css">
+</head>
+<body>
+    <header>
+        <h1>Como Utilizar PKGBUILD para Criar Pacotes no Arch Linux</h1>
+    </header>
+    <section>
+        <h2>O que é PKGBUILD?</h2>
+        <p>
+            O PKGBUILD é um arquivo de script usado no Arch Linux para automatizar o processo de criação de pacotes. 
+            Ele contém instruções para baixar, compilar, configurar e instalar programas, além de definir dependências e metadados do pacote.
+        </p>
+
+        <h2>Estrutura Básica de um Arquivo PKGBUILD</h2>
+        <p>Um PKGBUILD típico contém as seguintes variáveis:</p>
+        <ul>
+            <li><code>pkgname</code>: Nome do pacote.</li>
+            <li><code>pkgver</code>: Versão do pacote.</li>
+            <li><code>pkgrel</code>: Revisão do pacote, incrementada para novas versões.</li>
+            <li><code>arch</code>: Arquitetura suportada (geralmente <code>x86_64</code>).</li>
+            <li><code>url</code>: URL do projeto ou do repositório do software.</li>
+            <li><code>license</code>: Licença do software (por exemplo, GPL).</li>
+            <li><code>depends</code>: Lista de dependências necessárias para o pacote.</li>
+            <li><code>source</code>: URLs de onde o código-fonte será baixado.</li>
+            <li><code>md5sums</code>: Somas de verificação para validar o código-fonte.</li>
+        </ul>
+
+        <h3>Exemplo Básico de um PKGBUILD</h3>
+        <p>Abaixo está um exemplo de um PKGBUILD para um programa fictício "meu-programa":</p>
+        <pre><code>
+pkgname=meu-programa
+pkgver=1.0.0
+pkgrel=1
+arch=('x86_64')
+url="https://meusite.com/meu-programa"
+license=('GPL')
+depends=('bash')
+source=("https://meusite.com/meu-programa-$pkgver.tar.gz")
+md5sums=('abcd1234efgh5678ijkl9012mnop3456')
+
+build() {
+    cd "$srcdir/$pkgname-$pkgver"
+    ./configure --prefix=/usr
+    make
+}
+
+package() {
+    cd "$srcdir/$pkgname-$pkgver"
+    make DESTDIR="$pkgdir/" install
+}
+        </code></pre>
+
+        <h2>Passos para Criar e Instalar um Pacote com PKGBUILD</h2>
+        <h3>1. Preparar o Ambiente</h3>
+        <p>Certifique-se de ter as ferramentas necessárias instaladas:</p>
+        <pre><code>sudo pacman -S base-devel</code></pre>
+
+        <h3>2. Criar o Arquivo PKGBUILD</h3>
+        <p>Dentro de um diretório de trabalho, crie um arquivo chamado <code>PKGBUILD</code> com o conteúdo apropriado.</p>
+
+        <h3>3. Verificar e Construir o Pacote</h3>
+        <p>Para verificar o PKGBUILD e construir o pacote, use o seguinte comando:</p>
+        <pre><code>makepkg -si</code></pre>
+        <p>Esse comando irá:</p>
+        <ul>
+            <li>Verificar o PKGBUILD e o código-fonte.</li>
+            <li>Baixar o código-fonte especificado no campo <code>source</code>.</li>
+            <li>Construir o pacote.</li>
+            <li>Instalar o pacote (opção <code>-i</code>).</li>
+        </ul>
+
+        <h2>Variáveis e Funções Avançadas do PKGBUILD</h2>
+        <h3>Outras Variáveis Úteis</h3>
+        <ul>
+            <li><code>optdepends</code>: Dependências opcionais que ampliam as funcionalidades do programa.</li>
+            <li><code>makedepends</code>: Dependências necessárias apenas para a construção do pacote, mas não para execução.</li>
+            <li><code>provides</code>: Indica que o pacote fornece uma determinada funcionalidade (útil para pacotes alternativos).</li>
+            <li><code>conflicts</code>: Especifica pacotes que entram em conflito com este.</li>
+        </ul>
+
+        <h3>Funções Avançadas</h3>
+        <ul>
+            <li><code>prepare()</code>: Executada antes do <code>build()</code>, é usada para aplicar patches ou fazer ajustes no código-fonte.</li>
+            <li><code>pkgver()</code>: Usada para definir a versão do pacote automaticamente, útil para pacotes de desenvolvimento.</li>
+            <li><code>check()</code>: Executada após a construção, usada para testes automatizados.</li>
+        </ul>
+
+        <h2>Boas Práticas ao Criar PKGBUILD</h2>
+        <ul>
+            <li>Sempre verifique as somas de verificação (<code>md5sums</code>) para garantir a integridade do código-fonte.</li>
+            <li>Leia a documentação oficial sobre <code>makepkg</code> e PKGBUILD para entender as melhores práticas.</li>
+            <li>Mantenha o PKGBUILD organizado e com comentários quando necessário para facilitar futuras revisões.</li>
+        </ul>
+
+        <h2>Recursos Úteis</h2>
+        <ul>
+            <li><a href="https://wiki.archlinux.org/title/PKGBUILD" target="_blank">Wiki do Arch Linux sobre PKGBUILD</a></li>
+            <li><a href="https://man.archlinux.org/man/makepkg.8" target="_blank">Manual do makepkg</a></li>
+        </ul>
+    </section>
+     <footer>
+         <button><a href="../index.html">Retornar</a></button>
+        <p>&copy; 2024 Arch Guide | Criado para entusiastas do Arch Linux.</p>
+    </footer>
+  
+  <script src="../scripts/dlmode.js"></script>
+</body>
+</html>
