@@ -1,6 +1,5 @@
-body{
-   
-}
+
+
 
 
 
@@ -16,6 +15,8 @@ body{
             box-shadow: 0 0 5px rgba(0, 255, 0, 0.6); /* Sombramento verde suave */
             word-wrap: break-word; /* Quebra de linha para código longo */
             width: fit-content;
+            position: relative;
+            display: inline-block;
         }
 
         /* Estilo adicional para melhorar o visual de múltiplos comandos */
@@ -49,6 +50,7 @@ body {
     overflow-x: hidden;
     transition: 0.3s; /* Animação para abrir e fechar */
     padding-top: 60px;
+    z-index: 1999;
 }
 
 .sidebar h2 {
@@ -304,3 +306,22 @@ body.dark-mode {
 }
 
 
+
+/* Estilo do botão de copiar */
+.copy-btn {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 3px;
+    font-size: 12px;
+    cursor: pointer;
+    z-index: 10;
+}
+
+.copy-btn:hover {
+    background-color: #45a049;
+}
