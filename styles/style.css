@@ -195,7 +195,7 @@ header nav ul li a:hover {
 }
 
 section {
-    margin-top: 20px;
+    
 }
 
 
@@ -324,4 +324,37 @@ body.dark-mode {
 
 .copy-btn:hover {
     background-color: #45a049;
+}
+
+
+.container {
+    width: 90%;
+    max-width: 600px;
+    text-align: center;
+    align-content: center;
+    justify-content: center;
+}
+
+#searchBar {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    text-align: center;
+    align-content: center;
+    justify-content: center;
+}
+
+#results {
+    list-style-type: none;
+    padding: 0;
+}
+
+#results li {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    background-color: #fff;
 }
