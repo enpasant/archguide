@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/styles/style.css">
+    <title>ArchGuide - Desktop Environments</title>
+</head>
+<body>
+    <header>
+        <nav>
+            <a href="/index.html">Home</a>
+            <a href="/info/about/">About</a>
+            <a href="/guides/guides/">Guides</a>
+            <a href="/info/contribute/">Contribute</a>
+        </nav>
+    </header>
+
+    <main>
+        <h1>Desktop Environments</h1>
+        <p>A desktop environment (DE) is a great way to get started in Arch Linux. <br> To install one, please read this page.</p>
+        <h2>1. - Installing</h2>
+
+        <p>To install a desktop environment, you need internet access, and a compatible x-server. </p>
+        <h3>1.1 - Choosing a desktop environment</h3>
+        <p>In Arch Linux, there are a lot of available Desktop Environments. Below are the most known ones.</p>
+
+        <div id="deimg">
+            <img src="https://kde.org/announcements/megarelease/6/desktop.png" height="256px">
+            <p>KDE Plasma</p>
+            <a href="#download-kde">Download</a>
+        </div>
+
+        <div id="deimg">
+            <img src="https://files.tecnoblog.net/wp-content/uploads/2021/03/xfce-4-16.jpg" height="300px">
+            <p>xfce4</p>
+            <a href="#download-xfce4">Download</a>
+        </div>
+
+        <div id="deimg">
+            <img src="https://i.redd.it/linux-mint-gnome-edition-v0-5hxkxicmctfa1.png?width=1920&format=png&auto=webp&s=68b6a574573c3842cf93f90ca0e19fbb7823b3a1" height="256px">
+            <p>GNOME</p>
+            <a href="#download-gnome">Download</a>
+        </div>
+
+        <h3>1.2 - Installing a desktop environment</h3>
+        <p>In Arch Linux, installing packages is done via <code>pacman</code>.</p>
+        <p>These are the commands necessary for installing;</p>
+
+        <div id="installdes">
+            <h2 id="download-kde">KDE Plasma</h2><br>
+            <code id="terminal">sudo pacman -S plasma</code><br><br>
+            <p>This installs KDE Plasma.</p><br>
+
+            <h2 id="download-xfce4">xfce4</h2><br>
+            <code id="terminal">sudo pacman -S xfce4 xfce4-goodies</code><br><br>
+            <p>This installs xfce4 along with it's applications.</p><br>
+
+            <h2 id="download-gnome">GNOME</h2><br>
+            <code id="terminal">sudo pacman -S gnome </code><br><br>
+            <p>This installs GNOME.</p><br>
+        </div>
+
+        <h3>1.3 - Installing a display manager (DM)</h3>
+        <p>You will need a display manager for acessing the chosen desktop environment.<br>To install one, see below.</p>
+        <div id="deimg">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/a/a8/LightDM_1.2.1_on_Ubuntu_12.04.png" height="256px">
+            <p>LightDM</p>
+            <a href="#download-lightdm">Download</a>
+        </div>
+
+        <div id="deimg">
+            <img src="https://miro.medium.com/v2/resize:fit:1400/1*YFS-43Nenmy67-kuL59P3w.png" height="256px">
+            <p>GDM (Gnome Display Manager)</p>
+            <a href="#download-gdm">Download</a>
+        </div>
+
+        <div id="deimg">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcReBjoQm8A1d9ZTAh0Hbr_b26DfKWh9iO9duA&s" height="256px">
+            <p>SDDM (Simple Desktop Display Manager)</p>
+            <a href="#download-sddm">Download</a>
+        </div>
+
+        <div id="installdes">
+            <h2 id="download-lightdm">LightDM</h2><br>
+            <code id="terminal">sudo pacman -S lightdm && sudo systemctl enable --now lightdm</code><br><br>
+            <p>This installs LightDM.</p><br>
+
+            <h2 id="download-gdm">GDM (Gnome Display Manager)</h2><br>
+            <code id="terminal">sudo pacman -S gdm && sudo systemctl enable --now gdm</code><br><br>
+            <p>This installs GDM.</p><br>
+
+            <h2 id="download-gnome">SDDM (Simple Desktop Display Manager)</h2><br>
+            <code id="terminal">sudo pacman -S sddm && sudo systemctl enable --now sddm </code><br><br>
+            <p>This installs SDDM.</p><br>
+        </div>
+
+        <div id="conclusion">
+            <h1>Desktop Environments are a great way to start a fresh install from Arch Linux, make sure to do the best out of your system.</h1>
+        </div>
+    </main>
+</body>
+</html>
+
+<!-- https://i.redd.it/linux-mint-gnome-edition-v0-5hxkxicmctfa1.png?width=1920&format=png&auto=webp&s=68b6a574573c3842cf93f90ca0e19fbb7823b3a1-->

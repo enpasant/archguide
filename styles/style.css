@@ -1,0 +1,76 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    height: 100vh;
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    text-align: left;
+    color: white;
+    margin: 20px;
+    background: linear-gradient(to bottom, #7499aa, #2f424b) fixed;
+}
+
+header {
+    margin: 20px auto;
+    padding: 20px;
+    background-color: slategrey;
+    width: fit-content;
+    border-radius: 15px;
+    box-shadow: 4px 4px 5px;
+    outline-color: rgb(121, 174, 218);
+    outline-width: 2px;
+    outline-style:solid
+}
+
+a {
+    text-decoration: none;
+    color:rgb(206, 223, 255);
+    padding: 5px;
+}
+a:hover{
+    color: rgb(240, 246, 255);
+    font-weight: bold;
+}
+
+h1 {
+    padding: 20px;
+}
+
+#deimg {
+    margin: 20px;
+    padding: 20px;
+    text-align: center;
+}
+
+#installdes {
+    margin: 20px;
+    text-align: center;
+    padding: 20px;
+}
+
+#terminal {
+    background-color: #2e2e2e;
+    padding: 10px;
+    border-radius: 15px;
+    color: #00ff00;
+    font-weight: bold;
+}
+
+#showcaseimg {
+    text-align: center;
+    margin: 20px;
+    padding: 20px;
+}
+
+#showcaseimg img{
+    margin: 20px;
+    outline-style: solid;
+    outline-width: 2px;
+}
